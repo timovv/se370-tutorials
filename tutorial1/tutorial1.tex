@@ -1,0 +1,146 @@
+\documentclass[notes]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\usetheme{Luebeck}
+\usecolortheme{beaver}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+
+\title{SOFTENG 370 Tutorial 1}
+\author{Timo van Veenendaal}
+\date{4 August 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Hello}
+I am Timo, you might remember me from last year. I am the tutor for 370 this semester.
+    \begin{itemize}
+        \item In these tutorials I'll cover some things about the previous week's content
+        \item There should be some time for Q\&A about assignments, past tests, etc. most of the time -- I'll hang around at the end of the tutorial to answer questions
+        \item Alternatively, email me at tvan508@aucklanduni.ac.nz to set a time
+        \item If you have questions, ask on Piazza if possible instead of emailing so that the rest of the class can see!
+    \end{itemize}
+\end{frame}
+\begin{frame}{Plan}
+    \begin{enumerate}
+        \item Kernel and user modes
+        \item Linux
+        \item C on Linux
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Kernel}
+    \begin{alertblock}{Question}
+    What is kernel mode? How does it differ from user mode?
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item Having these two modes requires support from the hardware (i.e. the processor)
+        \item When the processor is in kernel mode, all instructions can be executed, including  \textbf{privileged instructions} which cannot be executed in user mode.
+        \item What are some examples of privileged instructions?
+        \item Why are privileged instructions (and kernel mode) needed?
+        \item What happens if a program attempts to execute a privileged instruction in user mode?
+    \end{itemize}
+\end{frame}
+\begin{frame}{Kernel}
+\begin{alertblock}{Question}
+    How do ordinary programs get access to privileged instructions?
+\end{alertblock}
+\begin{itemize}
+    \pause
+    \item Through \textbf{system calls}
+    \pause
+    \item A system call is a hardware mechanism that causes the processor to jump to a predefined location and enter kernel mode.
+    \item This location will contain some special code that is part of the kernel to handle the call. The kernel can of course use privileged instructions to complete the call
+    \item The kernel can run checks to make sure that the caller has permission to do what they want to do
+    \item When the kernel is finished handling the call, it tells the processor to return to user mode and then returns execution to the caller
+\end{itemize}
+\end{frame}
+\begin{frame}{Linux}
+    \begin{itemize}
+        \item You need access to Linux (or similar) for the assignments
+        \begin{itemize}
+            \item You may also be able to get away with developing on macOS since it is also UNIX-based but you could run in to issues
+        \end{itemize}
+        \item A few options
+        \begin{enumerate}
+            \item Windows Subsystem for Linux
+            \item Virtual machine
+            \item FlexIT virtual machine
+            \item Or dual boot...?
+        \end{enumerate}
+        \item Pick a distribution
+        \begin{itemize}
+            \item I recommend either Ubuntu or Manjaro if you haven't used Linux much before
+            \item Otherwise use a distro of your choice
+        \end{itemize}
+        \item Hopefully you are all comfortable with \texttt{bash} from 206
+    \end{itemize}
+\end{frame}
+\begin{frame}{Windows Subsystem for Linux (WSL)}
+    \begin{itemize}
+        \item The most convenient way to use Linux if your primary OS is Windows
+        \item WSL 2, recently released, is essentially a wrapper around a Linux virtual machine. The older version of WSL is implemented differently
+        \item Has excellent integration with VS Code through the ``Remote -- WSL'' extension (you'll want the C/C++ extension too)
+        \item See \url{https://docs.microsoft.com/en-us/windows/wsl/install-win10} for installation instructions.
+        \item Also check out the new Windows Terminal: \url{https://github.com/microsoft/terminal}
+        \item Demo later
+    \end{itemize}
+\end{frame}
+\begin{frame}{Virtual machine}
+\begin{itemize}
+    \item VirtualBox is free and good. A guide to installing Ubuntu on VirtualBox for Windows is available here: \url{https://brb.nci.nih.gov/seqtools/installUbuntu.html}
+    \begin{itemize}
+        \item You might have used this in 206 last year
+    \end{itemize}
+    \item Hyper-V is another alternative if using Windows Pro and is built in to the OS so you don't need to install anything
+\end{itemize}
+\end{frame}
+\begin{frame}{FlexIT}
+\begin{itemize}
+    \item Ubuntu VM in the cloud
+    \item Requires installation of VMWare Horizon client (see instructions)
+    \item Instructions at \url{https://www.auckland.ac.nz/en/students/my-tools/flex-it/flexit-guide.html}
+    \begin{itemize}
+        \item Look for Ubuntu in the listing
+    \end{itemize}
+    \item Demo
+\end{itemize}
+\end{frame}
+\begin{frame}{Demo}
+Demo of FlexIT and WSL now
+\end{frame}
+\begin{frame}{The C Programming Language}
+\begin{itemize}
+    \item You might remember C from ENGGEN 131 (and maybe even COMPSYS 201)
+    \item The way you will use C in this course is quite different to how it is approached in 131
+    \begin{itemize}
+        \item Feels more `low-level': heavy use of pointers, use of OS APIs (beyond just \texttt{printf})...
+    \end{itemize}
+    \item Compile on Linux using \texttt{gcc}
+\end{itemize}
+\end{frame}
+\begin{frame}{Compiling and \texttt{gcc}}
+\begin{itemize}
+    \item You might need to install \texttt{gcc}
+    \begin{itemize}
+        \item Ubuntu: \texttt{sudo apt install build-essential}, you may have to do \texttt{sudo apt update} first
+        \item Equivalents exist for other distributions, Google if unsure
+    \end{itemize}
+    \item To compile: \texttt{gcc -o <executable\_name> sourcefile.c}
+    \item Then to execute: \texttt{./executable\_name}
+    \item Let's do a demo
+\end{itemize}
+\end{frame}
+\begin{frame}{Questions}
+Any questions? About...
+\begin{itemize}
+    \item The course in general?
+    \item Installing Linux?
+    \item Using C and \texttt{gcc}?
+\end{itemize}
+Otherwise see you all next week
+\end{frame}
+\end{document}
