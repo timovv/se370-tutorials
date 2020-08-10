@@ -1,0 +1,86 @@
+\documentclass[notes]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\usetheme{Luebeck}
+\usecolortheme{beaver}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+
+\title{SOFTENG 370 Tutorial 2}
+\author{Timo van Veenendaal}
+\date{11 August 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Plan}
+    \begin{itemize}
+	\item C
+	\item Assignment
+	\item \texttt{pthread}s, \texttt{fork}, \texttt{pipe}, \texttt{mmap}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{C}
+    A quick refresher...
+    \begin{itemize}
+	\item Pointers
+	\item Structs
+	\item Arrays
+	\item Dynamic allocation
+    \end{itemize}
+    Demo: \texttt{pointerDemo.c}
+\end{frame}
+
+\begin{frame}{\texttt{pthread}s}
+    \begin{itemize}
+	\item Best information: in the respective man pages (e.g. \texttt{man pthread\_create})
+	\item \texttt{pthread\_create}, \texttt{pthread\_join}
+	\item Be careful with multiple threads accessing the same resource
+	\item Demo time!
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Creating processes}
+    \begin{itemize}
+	\pause
+	\item Create processes with \texttt{fork}
+	\item Processes, unlike threads, do not share memory
+	\item Let's take a look
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Sharing information}
+    Often we want to share information between processes. There are a couple of simple options you need to know for the assignment:
+    \begin{itemize}
+	\item Pipes
+	\item Shared memory
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pipes}
+    \begin{itemize}
+	\item It's like a stream of data (flowing through a pipe...)
+	\item Use the \texttt{pipe} library call. It will give you two file descriptors, one you can read from, one you can write from.
+	\item Can use to communicate between processes
+	\item Demo
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Shared memory}
+    \begin{itemize}
+	\item Memory that can be accessed by multiple processes
+	\item Shared memory areas created using \texttt{mmap}
+	\item Let's see
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Wrapping up}
+    \begin{itemize}
+	\item Any questions? (about C or assignment)
+	\item Next week's tutorial: assignment Q\&A
+    \end{itemize}
+\end{frame}
+\end{document}
