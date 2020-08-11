@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 struct MyStruct {
     int a;
@@ -6,8 +7,9 @@ struct MyStruct {
 };
 
 void pointers(void) {
-    int value = 3;
+    int value = NULL;
     int *pointsToValue = &value;
+    int *nullx = NULL;
 
     printf("pointsToValue is %d\n", pointsToValue);
     printf("value is %d\n", value);
@@ -17,31 +19,27 @@ void pointers(void) {
 void structs(void) {
     struct MyStruct data;
 
-    data.a = 3;
+    data.a = 4535;
     data.b = 4;
 
     struct MyStruct *dataPointer = &data;
-    printf("a=%d b=%d\n", dataPointer->a, dataPointer->b);
+    dataPointer->a = 4;
 }
+
+int result;
 
 // What's wrong with this?
 int* badPointer(void) {
-    int b = 3;
-    return &b;
+    int* x = malloc(sizeof(int));
+    *x = 3;
 }
 
 int main(const int argc, const char **argv) {
 
-    // 1. How do these values work?
-    pointers();
-
     // 2. What's the problem?
     // How would I fix this?
     int *result = badPointer();
-
-    // 3. Looking at structs
-    structs();
-
     printf("Result is %d\n", *result);
+    free(result);
 }
 

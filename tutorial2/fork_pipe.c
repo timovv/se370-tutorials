@@ -22,13 +22,11 @@ int main(const int argc, const char **argv) {
 
     pid_t pid = fork();
     doSum(&sum);
-
-
-    if(pid == 0) {
-	int other_sum;
-	read(*read_fd, &other_sum, sizeof(int)); 
-	printf("The sum is: %d\n", sum + other_sum);
+    if(pid != 0) {
+        int other_sum;
+        read(*read_fd, &other_sum, sizeof(int)); 
+        printf("The sum is: %d\n", sum + other_sum);
     } else {
-	write(*write_fd, &sum, sizeof(int));
+        write(*write_fd, &sum, sizeof(int));
     }
 }

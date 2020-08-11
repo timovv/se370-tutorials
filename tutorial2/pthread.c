@@ -5,7 +5,7 @@ void* doSum(void *addr) {
     int *addr_as_intptr = (int *)addr;
 
     for(int i = 0; i < 50000; ++i)  {
-	*addr_as_intptr += 1;
+        *addr_as_intptr = *addr_as_intptr + 1;
     }
 
     return NULL;

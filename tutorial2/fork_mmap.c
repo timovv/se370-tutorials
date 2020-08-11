@@ -22,7 +22,7 @@ int main(const int argc, const char **argv) {
     pid_t pid = fork();
     doSum(sum);
 
-    if(pid == 0) {
+    if(pid != 0) {
 	wait(NULL);
 	printf("The sum is: %d\n", *sum);
     }
