@@ -1,0 +1,100 @@
+\documentclass[notes]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\usetheme{Luebeck}
+\usecolortheme{beaver}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+
+\title{SOFTENG 370 Tutorial 3}
+\author{Timo van Veenendaal}
+\date{18 August 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Hello again}
+    \begin{itemize}
+	\item Welcome back to remote university
+	\item Tutorials are still on at the normal time! They are recorded too!
+	\item Want to meet? Pick a time at \url{https://calendly.com/timov/se370-office-hours} and I'll meet you on Zoom!
+	\item Questions during tutorial? Unmute yourself and ask or put them in the Zoom chat
+	\item Questions outside tutorial? Contact me, any way is good but my email is tvan508@aucklanduni.ac.nz
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Plan}
+    \begin{itemize}
+	\item Recap of \texttt{mmap}
+	\item Condition variables
+	\item Assignment Q\&A
+    \end{itemize}
+    Example files from tutorials are available on GitHub: \url{https://github.com/timovv/se370-tutorials/}.
+\end{frame}
+
+\begin{frame}[fragile]{Memory mapping}
+     \begin{itemize}
+	 \item \texttt{mmap} lets you create a \textit{memory object} (memory mapping) in the process's memory. It is a very powerful function with a lot of use cases.
+	\item From the man page (\texttt{man mmap}):
+
+\begin{verbatim}
+The mmap() function shall establish a mapping
+between an address space of a process and a
+memory object.
+
+The mmap() function shall be supported for
+the following memory objects:
+     *  Regular files
+     *  Shared memory objects
+     *  Typed memory objects
+\end{verbatim}
+     \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Memory mapping}
+    \texttt{mmap} has the following signature:
+\begin{verbatim}
+void *mmap(void *addr, size_t len, int prot, int flags,
+           int fildes, off_t off);
+\end{verbatim}
+    \begin{itemize}
+	\item \texttt{void *addr}: address within the process's memory space where the memory mapping should be created. Pass \texttt{NULL} to let the OS to figure it out.
+	\item \texttt{size\_t len}: size (in bytes) of the memory mapping.
+	\item \texttt{int prot}: protection flags. Some combination of \texttt{PROT\_READ}, \texttt{PROT\_WRITE}, and \texttt{PROT\_EXEC} ORed together using \texttt{|}. Specifies what can be done with the mapped area.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Memory mapping}
+    \texttt{mmap} has the following signature:
+\begin{verbatim}
+void *mmap(void *addr, size_t len, int prot, int flags,
+           int fildes, off_t off);
+\end{verbatim}
+    \begin{itemize}
+	\item \texttt{int flags}: bitwise or of these flags: \texttt{MAP\_ANONYMOUS} (mapping not attached to a file), \texttt{MAP\_SHARED} (share mapping between processes) and \texttt{MAP\_PRIVATE} (unique copy of memory for each process).
+	\item \texttt{int fildes}: a file descriptor for a file previously opened using \texttt{open()}. If no file, set to -1.
+	\item \texttt{int off}: offset into the file for the memory mapping.
+	\item Returns a \texttt{void *} pointing to the created memory mapping.
+	\item Q: What arguments for \texttt{mmap} would create an area for processes can communicate with?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Condition variables}
+    \begin{itemize}
+	\item Assignment step 4
+	\item Can be used to block a thread, or multiple threads at the same time, until another thread both modifies a shared variable (the \textit{condition}), and signals the condition variable.
+	\item \texttt{pthread\_cond\_wait}: wait on the condition variable to be signalled by another thread.
+	\item \texttt{pthread\_cond\_signal}: signal the condition variable, releasing one \textbf{or more} waiting threads. Called after changing some condition.
+	\item Used in combination with a mutex which protects the condition.
+	\item Demo: \texttt{condition\_vars.c}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Q\&A}
+    \begin{itemize}
+	\item Questions about the assignment?
+    \end{itemize}
+\end{frame}
+\end{document}
