@@ -1,0 +1,110 @@
+\documentclass[notes]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\usetheme{Luebeck}
+\usecolortheme{beaver}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+
+\title{SOFTENG 370 Tutorial 4}
+\author{Timo van Veenendaal}
+\date{25 August 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Today}
+    \begin{itemize}
+        \item Test is next week :)
+        \item This tutorial: going over some past test questions
+        \item Includes Kahoot!
+        \item Slides will be uploaded after tutorial
+    \end{itemize}
+\end{frame}
+\begin{frame}{Kahoot!}
+    \href{https://play.kahoot.it/v2/?quizId=d7c62e90-bd32-4e2f-99ec-e459d5c7f13d}{[[ Show the Kahoot now ]]}
+
+    Thank you to Edward Zhang, last year's 370 tutor, for the Kahoot!
+\end{frame}
+\begin{frame}{Test 2019 Question 1b}
+    \begin{alertblock}{Question}
+        Choose one significant change in the history of operating systems. Explain in approximately three sentences what the change was and why you consider it significant. The change can be either hardware or software.
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item A pretty open-ended question, there's lots you could talk about
+        \item Some ideas: faster CPUs, more memory, addition of kernel/user mode, protected memory
+        \item Plus something reasonable about why that is important
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Test 2019 Question 1c}
+    \begin{alertblock}{Question}
+        Give a reason why a language such as Python would not be used to implement an operating system.
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item Again, quite open-ended.
+        \item It doesn't give direct access to memory addresses.
+        \item It doesn't map well to machine code (Python is object-oriented).
+        \item It has a large runtime.
+        \item It is slow compared to C.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Test 2018 Question 3a}
+    \begin{alertblock}{Question}
+        What problem does the ``trap and emulate'' approach solve with respect to virtual machines and how does it solve this problem?
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item Deals with the problem of guest operating systems not being able to execute privileged instructions
+        \item VMM catches the exception, determines which VM is responsible, and emulates or runs the privileged instruction before returning to the guest
+    \end{itemize}
+\end{frame}
+\begin{frame}{Test 2019 Question 2b}
+    \begin{alertblock}{Question}
+        Virtual memory has traditionally been difficult to implement on virtual machines. This problem has been solved either with shadow page tables or more recently with second level address translation. Explain why virtual memory is a problem in virtual environments.
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item Each OS expects full control over the physical memory, including low-level changes as to which pages are where.
+        \item So the physical page tables need to be under the control of the VMM
+        \item Either the page tables the guest uses are not the real ones (shadow page tables)
+        \item Or an extra level of translation needs to be supported by the hardware
+    \end{itemize}
+\end{frame}
+\begin{frame}{Test 2018 Question 4a}
+    \begin{alertblock}{Question}
+        Explain the difference between a thread and a process?
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item A process has two parts: the resources allocated to it (memory, files, devices...) and the running part which is one or more threads
+        \item A thread is a sequence of instructions running inside a process
+        \item Switching between threads in the same process is generally simpler than between processes since most resources are shared and don't need to be changed
+    \end{itemize}
+\end{frame}
+\begin{frame}{Test 2018 Question 4b/c (adapted)}
+    \begin{alertblock}{Question}
+        What is the most important difference between system level and user level threads? \\
+        What is a consequence of that difference?
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item The OS knows about system level threads and can therefore schedule them individually
+        \pause
+        \item Consequence: multiple user level threads in the same process cannot run on different CPUs simultaneously. Also, if one user level thread is blocked, then the other user level threads cannot run since as far as the OS is concerned, that single thread is blocked (unless the user-level thread implementation accounts for this (how?))
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{That's it}
+    \begin{itemize}
+        \item Any questions?
+        \item See you all next week
+        \item Next week's tutorial: more test questions!
+        \item Good luck with your study
+    \end{itemize}
+\end{frame}
+\end{document}
