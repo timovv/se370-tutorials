@@ -1,0 +1,138 @@
+\documentclass[notes]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\usetheme{Luebeck}
+\usecolortheme{beaver}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+
+\title{SOFTENG 370 Tutorial 5}
+\author{Timo van Veenendaal}
+\date{1 September 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Today}
+    \begin{itemize}
+        \item More test questions (and another Kahoot)
+        \item Last tutorial before the test
+        \item Test is on Thursday afternoon, good luck!
+        \item Office hours this week: 12 to 1pm Thursday, Zoom call in announcement (for last-minute questions)
+        \item Come to SESA Speed Interviews!
+        \item Slides again will be uploaded after tutorial
+        \item Recording check
+    \end{itemize}
+\end{frame}
+\begin{frame}{Kahoot!}
+    \href{https://play.kahoot.it/v2/?quizId=a560fc0b-16cc-4157-b2ee-17d910e96774}{[[ Show the Kahoot now ]]}
+\end{frame}
+\begin{frame}{Test 2019 Question 5a}
+    \begin{alertblock}{Question}
+        A spin lock produces busy waiting. One solution to the busy waiting problem is to put the waiting process to sleep every time around the loop. When it awakens it checks the lock again. Why is this not an ideal solution?
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item Waiting processes are still running perioidically, this is not an ideal solution
+        \item What if the lock becomes available while sleeping and then becomes unavailable again before the thread wakes up?
+    \end{itemize}
+\end{frame}
+\begin{frame}{Test 2019 Question 5b}
+    This question is based on 2019's assignment 1, so the step numbers don't match exactly, but the idea is similar. The assignment was parallel merge sort. Note that merge sort splits the array evenly, so both sides would take roughly the same time to sort.
+    \begin{alertblock}{Question}
+        Here are some timings from assignment 1 for step 2 (two threads) and step 8 (two processes, shared memory).
+        \begin{table}
+            \centering
+            \begin{tabular}{c|c|c}
+                \hline
+                       & Step 2 & Step 8 \\ \hline
+                Real   & 11.79  & 11.81  \\ \hline
+                User   & 21.47  & 21.41  \\ \hline
+                System & 0.27   & 0.32   \\ \hline
+            \end{tabular}
+        \end{table}
+        Explain the similarities in times for these two steps.
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item The use of shared memory makes the work very similar to using threads.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Test 2019 Question 4a}
+    \begin{alertblock}{Question}
+        Here are the burst times and arrival times for a number of processses (in milliseconds).
+        \begin{table}
+            \centering
+            \begin{tabular}{c|c|c}
+                \hline
+                Process & Arrival time & Burst time \\ \hline
+                A       & 0            & 4          \\ \hline
+                B       & 2            & 12         \\ \hline
+                C       & 6            & 6          \\ \hline
+                D       & 20           & 10         \\ \hline
+                E       & 21           & 8          \\ \hline
+            \end{tabular}
+        \end{table}
+        Draw a diagram showing the pre-emptive shortest job first schedule of these processes. Also calculate the average wait time.
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item Answer (split into 5 millisecond blocks):\\ \texttt{AAAAB BCCCC CCBBB BBBBB BBEEE EEEEE DDDDD DDDDD}
+        \item Average wait time: $(0 + (2 + 6) + 0 + 10 + 1) / 5 = 19 / 5$.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Test 2019 Question 4b}
+    \begin{alertblock}{Question}
+        Given the same processes and process burst times as the previous question, if all processes are available at time zero, calculate the schedule which produces the smallest average wait time. Also calculate the average wait time.
+        \begin{table}
+            \centering
+            \begin{tabular}{c|c}
+                \hline
+                Process & Burst time \\ \hline
+                A       & 4          \\ \hline
+                B       & 12         \\ \hline
+                C       & 6          \\ \hline
+                D       & 10         \\ \hline
+                E       & 8          \\ \hline
+            \end{tabular}
+        \end{table}
+        Draw a diagram showing the pre-emptive shortest job first schedule of these processes. Also calculate the average wait time.
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item Answer (split into 5 millisecond blocks):\\ \texttt{AAAAC CCCCC EEEEE EEEDD DDDDD DDDBB BBBBB BBBBB}
+        \item Average wait time: $(0 + 4 + 10 + 18 + 28) / 5 = 60 / 5 = 12$
+    \end{itemize}
+\end{frame}
+\begin{frame}{Test 2019 Question 3(a)}
+    \begin{alertblock}{Question}
+        Many operating systems have a concept of the owner of a process and this information is stored in protected memory. Explain what could go wrong if this information was not protected?
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item Privileges are associated with the owner
+        \item The owner can kill the process
+        \item If this information is unprotected anybody can change the owner, allowing them to mess with the process
+    \end{itemize}
+\end{frame}
+\begin{frame}{Test 2019 Question 3(b)}
+    \begin{alertblock}{Question}
+        Give two reasons why a system may want to use cooperative multitasking rather than preemptive multitasking.
+    \end{alertblock}
+    \pause
+    \begin{itemize}
+        \item More efficient as there is no unnecessary context switching
+        \item Because scheduling is under the control of the running thread/process there is no longer a problem with being prempted in critical sections of code
+    \end{itemize}
+\end{frame}
+\begin{frame}{That's it}
+    \begin{itemize}
+        \item Any questions?
+        \item See you all next week
+        \item Good luck with your study
+    \end{itemize}
+\end{frame}
+\end{document}
