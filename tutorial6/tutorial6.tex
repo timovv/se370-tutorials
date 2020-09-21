@@ -1,0 +1,67 @@
+\documentclass[notes]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\usetheme{Luebeck}
+\usecolortheme{beaver}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+
+\title{SOFTENG 370 Tutorial 6}
+\author{Timo van Veenendaal}
+\date{21 September 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Welcome back}
+    Hope everyone had a good break! This week and next week's tutorial are remote on Zoom again. We'll see about the weeks after that.
+
+    Check that the recording is on now.
+\end{frame}
+\begin{frame}{Plan}
+    \begin{enumerate}
+        \item Assignment 2
+        \item Python
+        \item Q\&A
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Assignment 2}
+    \begin{itemize}
+        \item Theme: file systems
+        \item Based on a Python binding of \texttt{libfuse}, a library which allows for filesystems to be defined in user space (see lectures)
+        \item 3 parts:
+            \begin{itemize}
+                \item Part 1: play around with the provided code and answer some questions
+                \item Part 2: have a look at how the memory-based file system (\texttt{memory.py}) works and answer more questions (actually just 1 question)
+                \item Part 3: make your own file system!
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+\begin{frame}{Python syntax}
+    A bit different to Java, but shouldn't be too hard to pick up:
+    \begin{itemize}
+        \item No semicolons
+        \item Python has lists and dictionaries built in
+        \item Classes can have multiple inheritance
+        \item Spaces and stuff matter
+        \item Let's take a look at some of the assignment code to explore some of the differences
+    \end{itemize}
+\end{frame}
+\begin{frame}{\texttt{os} module}
+    \begin{itemize}
+        \item Python's \texttt{os} module (\texttt{import os}) has a few different low-level helpers which you will need in Part 3.
+        \item \texttt{os.open}, \texttt{os.mkdir}, \texttt{os.mknod}, \texttt{os.path.join}, \dots
+        \item Many of them map directly to Linux system calls (so you can check the man page: \texttt{man 2 mknod}, \texttt{man 2 open}, etc...)
+        \item These functions (and more) may be needed to implement your file system.
+        \item Unsure? Check out the docs: \url{https://docs.python.org/3/library/os.html}.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Questions?}
+    \begin{itemize}
+        \item Questions on the assignment or on course content from this week?
+        \item Otherwise, see you next week. Next week will be more on A2.
+    \end{itemize}
+\end{frame}
+\end{document}
